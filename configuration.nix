@@ -64,17 +64,6 @@
   users.users.raison = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      tree
-      neovim
-      sunsetr
-      python313Packages.pynvim
-      alacritty
-      cowsay
-      fortune
-      fuzzel
-      skim
-    ];
   };
 
   programs.firefox.enable = true;
@@ -111,7 +100,16 @@
     efibootmgr
     zellij
     home-manager
+		upower
+		blesh
   ];
+	powerManagement.enable = true;
+	powerManagement.powertop.enable = true;
+	programs.bash = {
+		enableLsColors = true;
+		vteIntegration = true;
+		blesh.enable = true;
+	};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -125,6 +123,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+	
+	services.power-profiles-daemon.enable = true;
+	services.upower.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
