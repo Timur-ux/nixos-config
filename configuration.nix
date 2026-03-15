@@ -107,7 +107,6 @@
 	powerManagement.powertop.enable = true;
 	programs.bash = {
 		enableLsColors = true;
-		vteIntegration = true;
 		blesh.enable = true;
 	};
 

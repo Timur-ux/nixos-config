@@ -19,8 +19,11 @@
 	};
 
 	
+	programs.autojump.enable = true;
 	programs.bash = {
 		enable = true;
+		enableVteIntegration = true;
+		enableCompletion = true;
 		shellAliases = {
 			rebuild = "sudo nixos-rebuild switch";
 			vi = "nvim";
