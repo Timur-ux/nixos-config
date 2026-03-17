@@ -15,19 +15,33 @@
       skim
 			power-profiles-daemon
 			bash
+			starship
+			matugen
+			cups-pk-helper
+			cava
+			khal
+			fprintd
     ];
 	};
 
 	
+	programs.starship = {
+		enable = true;
+		enableBashIntegration = true;
+	};
 	programs.autojump.enable = true;
 	programs.bash = {
 		enable = true;
 		enableVteIntegration = true;
 		enableCompletion = true;
 		shellAliases = {
-			rebuild = "sudo nixos-rebuild switch";
+			nxs = "sudo nixos-rebuild switch --flake ~/nix/";
+			hms = "home-manager switch --flake ~/nix/";
 			vi = "nvim";
 			v =  "nvim";
+		};
+		sessionVariables = {
+			XDG_CONFIG_HOME="$HOME/.config";
 		};
 	};
 }
