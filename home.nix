@@ -4,6 +4,15 @@
 		homeDirectory = "/home/raison/";
 		stateVersion = "25.11";
     packages = with pkgs; [
+			wl-clipboard
+			gdb
+			cmake
+			clang-tools
+			kdePackages.okular
+			zathura
+			gnumake
+			gcc
+			bear
       tree
       neovim
       sunsetr
@@ -21,10 +30,16 @@
 			cava
 			khal
 			fprintd
+			ripgrep
     ];
+		shell.enableBashIntegration = true;
+		sessionPath = [
+			"$HOME/.local/bin"
+		];
 	};
 
-	
+	xdg.enable = true;
+
 	programs.starship = {
 		enable = true;
 		enableBashIntegration = true;
@@ -39,9 +54,6 @@
 			hms = "home-manager switch --flake ~/nix/";
 			vi = "nvim";
 			v =  "nvim";
-		};
-		sessionVariables = {
-			XDG_CONFIG_HOME="$HOME/.config";
 		};
 	};
 }

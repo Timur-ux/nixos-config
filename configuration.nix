@@ -50,6 +50,12 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
+	
+	# enable shared libs
+	programs.nix-ld.enable = true;
+	# programs.nix-ld.libraries = with pkgs; [
+	#
+	# ];
 
   # Enable sound.
   # services.pulseaudio.enable = false;
