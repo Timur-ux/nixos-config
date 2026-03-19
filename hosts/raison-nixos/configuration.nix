@@ -5,72 +5,16 @@
 { config, pkgs, pkgs-unstable, ... }:
 {
   # enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  imports =
-    [
-      ./hardware-configuration.nix # Include the results of the hardware scan.
-      ./cachix.nix
-    ];
+  nix.settings = {
+		experimental-features = [ "nix-command" "flakes" ];
+		auto-optimise-store = true; # collapse identical files in store in one
+	};
+  imports = [
+		./hardware-configuration.nix # Include the results of the hardware scan.
+		../../system
+  ];
 
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use GRUB2 EFI boot loader
-  # boot.loader.grub = { enable = true; useOSProber = true; efiSupport = true; device = "nodev"; # efiInstallAsRemovable = true; };
-
-  networking.hostName = "raison-nixos"; # Define your hostname.
-
-  # Configure network connections interactively with nmcli or nmtui.
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Moscow";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 	
-	# enable shared libs
-	programs.nix-ld.enable = true;
-	# programs.nix-ld.libraries = with pkgs; [
-	#
-	# ];
-
-  # Enable sound.
-  # services.pulseaudio.enable = false;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  services.libinput.enable = true;
-
-  users.users.raison = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
-  };
 
   programs.firefox.enable = true;
   programs.niri = {
@@ -82,6 +26,7 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = let unstable = pkgs-unstable; in with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+		cachix
     unstable.dms-shell
     unstable.dgop
     wget

@@ -1,5 +1,6 @@
 {
 	description = "Tias/Raison/Timur-ux/my nixos config";
+
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 		nixpkgs-unstable = {
@@ -25,12 +26,15 @@
 	 in {
 		nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
 			inherit system;
-			modules = [ ./configuration.nix ];
-			specialArgs = { pkgs-unstable = unstable; };
+			modules = [ ./hosts/${hostname}/configuration.nix ];
+			specialArgs = { 
+				pkgs-unstable = unstable;
+				inherit hostname username;
+			};
 		};
 		homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
 			pkgs = nixpkgs.legacyPackages.${system};
-			modules = [ ./home.nix ];
+			modules = [ ./home/home.nix ];
 		};
 	};
 }

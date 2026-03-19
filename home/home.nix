@@ -52,8 +52,16 @@
 		shellAliases = {
 			nxs = "sudo nixos-rebuild switch --flake ~/nix/";
 			hms = "home-manager switch --flake ~/nix/";
+
 			vi = "nvim";
 			v =  "nvim";
+
+			gs = "git status";
+			ga = "git add";
+			gc = "git commit";
+			gp = "git push";
+
+		
 		};
 	};
 }
