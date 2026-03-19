@@ -1,25 +1,25 @@
-{ pkgs, ... } : {
-	home = {
-		username = "raison";
-		homeDirectory = "/home/raison/";
-		stateVersion = "25.11";
+{pkgs, ...}: {
+  home = {
+    username = "raison";
+    homeDirectory = "/home/raison/";
+    stateVersion = "25.11";
     packages = with pkgs; [
-			alejandra # nix formatter
+      alejandra # nix formatter
 
-			stylua
-			nil # nix ls
-			lua-language-server
-			texlab
-			clang-tools
+      stylua
+      nil # nix ls
+      lua-language-server
+      texlab
+      clang-tools
 
-			wl-clipboard
-			gdb
-			cmake
-			kdePackages.okular
-			zathura
-			gnumake
-			gcc
-			bear
+      wl-clipboard
+      gdb
+      cmake
+      kdePackages.okular
+      zathura
+      gnumake
+      gcc
+      bear
       tree
       neovim
       sunsetr
@@ -29,46 +29,44 @@
       fortune
       fuzzel
       skim
-			power-profiles-daemon
-			bash
-			starship
-			matugen
-			cups-pk-helper
-			cava
-			khal
-			fprintd
-			ripgrep
+      power-profiles-daemon
+      bash
+      starship
+      matugen
+      cups-pk-helper
+      cava
+      khal
+      fprintd
+      ripgrep
     ];
-		shell.enableBashIntegration = true;
-		sessionPath = [
-			"$HOME/.local/bin"
-		];
-	};
+    shell.enableBashIntegration = true;
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
+  };
 
-	xdg.enable = true;
+  xdg.enable = true;
 
-	programs.starship = {
-		enable = true;
-		enableBashIntegration = true;
-	};
-	programs.autojump.enable = true;
-	programs.bash = {
-		enable = true;
-		enableVteIntegration = true;
-		enableCompletion = true;
-		shellAliases = {
-			nxs = "sudo nixos-rebuild switch --flake ~/nix/";
-			hms = "home-manager switch --flake ~/nix/";
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+  programs.autojump.enable = true;
+  programs.bash = {
+    enable = true;
+    enableVteIntegration = true;
+    enableCompletion = true;
+    shellAliases = {
+      nxs = "sudo nixos-rebuild switch --flake ~/nix/";
+      hms = "home-manager switch --flake ~/nix/";
 
-			vi = "nvim";
-			v =  "nvim";
+      vi = "nvim";
+      v = "nvim";
 
-			gs = "git status";
-			ga = "git add";
-			gc = "git commit";
-			gp = "git push";
-
-
-		};
-	};
+      gs = "git status";
+      ga = "git add";
+      gc = "git commit";
+      gp = "git push";
+    };
+  };
 }

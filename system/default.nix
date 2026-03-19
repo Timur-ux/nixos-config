@@ -1,17 +1,17 @@
 {
-	imports = [
-		./niri.nix
-		./garbage-collector.nix
-		./boot.nix
-		./network.nix
-		./time.nix
-		./printers.nix
-		./sound.nix
-		./input.nix
-		./user.nix
-		./graphics.nix
-		./docker.nix
-		./filesystems.nix
-		./bluetooth.nix
-	];
+  imports = [
+    ./niri.nix
+    ./garbage-collector.nix
+    ./boot.nix
+    ./network.nix
+    ./time.nix
+    ./printers.nix
+    ./sound.nix
+    ./input.nix
+    ./user.nix
+    ./graphics.nix
+    ./docker.nix
+    ./filesystems.nix
+    ./bluetooth.nix
+  ];
 }

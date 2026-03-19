@@ -1,19 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, pkgs, pkgs-unstable, ... }:
 {
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   # enable flakes
   nix.settings = {
-		experimental-features = [ "nix-command" "flakes" ];
-		auto-optimise-store = true; # collapse identical files in store in one
-	};
+    experimental-features = ["nix-command" "flakes"];
+    auto-optimise-store = true; # collapse identical files in store in one
+  };
   imports = [
-		./hardware-configuration.nix # Include the results of the hardware scan.
-		../../system
+    ./hardware-configuration.nix # Include the results of the hardware scan.
+    ../../system
   ];
-	
 
   programs.firefox.enable = true;
   programs.niri = {
@@ -23,46 +25,49 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = let unstable = pkgs-unstable; in with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-		cachix
-    unstable.dms-shell
-    unstable.dgop
-    wget
-    curl
-    niri
-    ly
-    python313
-    python313Packages.virtualenv
-    python313Packages.pip
-    nodejs_24
-    zip
-    unzip
-    file
-    git
-    git-lfs
-    cachix
-    stow
-    htop
-    quickshell
-    wl-mirror
-    jq
-    efibootmgr
-    zellij
-    home-manager
-		upower
-		blesh
+  environment.systemPackages = let
+    unstable = pkgs-unstable;
+  in
+    with pkgs; [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      cachix
+      unstable.dms-shell
+      unstable.dgop
+      wget
+      curl
+      niri
+      ly
+      python313
+      python313Packages.virtualenv
+      python313Packages.pip
+      nodejs_24
+      zip
+      unzip
+      file
+      git
+      git-lfs
+      cachix
+      stow
+      htop
+      quickshell
+      wl-mirror
+      jq
+      efibootmgr
+      zellij
+      home-manager
+      upower
+      blesh
+    ];
+  powerManagement.enable = true;
+  powerManagement.powertop.enable = true;
+  programs.bash = {
+    enableLsColors = true;
+    blesh.enable = true;
+  };
+  fonts.packages = with pkgs; [
+    noto-fonts
+    nerd-fonts.jetbrains-mono
   ];
-	powerManagement.enable = true;
-	powerManagement.powertop.enable = true;
-	programs.bash = {
-		enableLsColors = true;
-		blesh.enable = true;
-	};
-	fonts.packages = with pkgs; [
-		noto-fonts
-		nerd-fonts.jetbrains-mono
-	];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -76,9 +81,9 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-	
-	services.power-profiles-daemon.enable = true;
-	services.upower.enable = true;
+
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -109,5 +114,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }

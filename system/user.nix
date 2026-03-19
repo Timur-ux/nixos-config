@@ -1,10 +1,13 @@
-{ pkgs, username, ... } :
 {
+  pkgs,
+  username,
+  ...
+}: {
   users = {
-		defaultUserShell = pkgs.bash;
-		users.${username} = {
-			isNormalUser = true;
-			extraGroups = [ "wheel" "networkmanager" "docker" ];
-		};
-	};
+    defaultUserShell = pkgs.bash;
+    users.${username} = {
+      isNormalUser = true;
+      extraGroups = ["wheel" "networkmanager" "docker"];
+    };
+  };
 }
