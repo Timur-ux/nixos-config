@@ -4,7 +4,7 @@
 		defaultUserShell = pkgs.bash;
 		users.${username} = {
 			isNormalUser = true;
-			extraGroups = [ "wheel" "networkmanager" ];
+			extraGroups = [ "wheel" "networkmanager" "docker" ];
 		};
 	};
 }

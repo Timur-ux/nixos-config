@@ -1,4 +1,4 @@
-{ config, pkgs, ... } : {
+{ pkgs, dms, ... } : {
 	home = {
 		username = "raison";
 		homeDirectory = "/home/raison/";
@@ -7,7 +7,6 @@
 			wl-clipboard
 			gdb
 			cmake
-			clang-tools
 			kdePackages.okular
 			zathura
 			gnumake
@@ -37,6 +36,10 @@
 			"$HOME/.local/bin"
 		];
 	};
+	imports = [
+		dms.homeModules.dank-material-shell
+		./modules
+	];
 
 	xdg.enable = true;
 

@@ -13,7 +13,6 @@
 		./hardware-configuration.nix # Include the results of the hardware scan.
 		../../system
   ];
-
 	
 
   programs.firefox.enable = true;

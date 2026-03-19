@@ -10,5 +10,8 @@
 		./input.nix
 		./user.nix
 		./graphics.nix
+		./docker.nix
+		./filesystems.nix
+		./bluetooth.nix
 	];
 }

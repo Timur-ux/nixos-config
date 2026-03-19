@@ -10,9 +10,13 @@
 			url = "github:nix-community/home-manager/release-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		dms = {
+			url = "github:AvengeMedia/DankMaterialShell/stable";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 
-	outputs = { self, nixpkgs, nixpkgs-unstable, home-manager }:
+	outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, dms }:
 		let
 			hostname = "raison-nixos";
 			username = "raison";
@@ -35,6 +39,9 @@
 		homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
 			pkgs = nixpkgs.legacyPackages.${system};
 			modules = [ ./home/home.nix ];
+			specialArgs = {
+				inherit dms;
+			};
 		};
 	};
 }
