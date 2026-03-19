@@ -1,9 +1,17 @@
-{ pkgs, dms, ... } : {
+{ pkgs, ... } : {
 	home = {
 		username = "raison";
 		homeDirectory = "/home/raison/";
 		stateVersion = "25.11";
     packages = with pkgs; [
+			alejandra # nix formatter
+
+			stylua
+			nil # nix ls
+			lua-language-server
+			texlab
+			clang-tools
+
 			wl-clipboard
 			gdb
 			cmake
@@ -36,10 +44,6 @@
 			"$HOME/.local/bin"
 		];
 	};
-	imports = [
-		dms.homeModules.dank-material-shell
-		./modules
-	];
 
 	xdg.enable = true;
 
@@ -64,7 +68,7 @@
 			gc = "git commit";
 			gp = "git push";
 
-		
+
 		};
 	};
 }
