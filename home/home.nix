@@ -4,8 +4,15 @@
     homeDirectory = "/home/raison/";
     stateVersion = "25.11";
     packages = with pkgs; [
+      tree-sitter
+			fd
+			# texlive
+			texlivePackages.latexmk
+
+			# formatters
       alejandra # nix formatter
 
+			# lsp
       stylua
       nil # nix ls
       lua-language-server
