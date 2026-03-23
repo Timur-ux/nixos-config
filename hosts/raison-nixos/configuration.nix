@@ -6,10 +6,14 @@
   pkgs,
   pkgs-unstable,
   ...
-}: {
+}:
+{
   # enable flakes
   nix.settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     auto-optimise-store = true; # collapse identical files in store in one
   };
   imports = [
@@ -25,10 +29,14 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = let
-    unstable = pkgs-unstable;
-  in
-    with pkgs; [
+  environment.systemPackages =
+    let
+      unstable = pkgs-unstable;
+    in
+    with pkgs;
+    [
+      efivar
+      cargo
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       cachix
       unstable.dms-shell
@@ -48,21 +56,18 @@
       git-lfs
       cachix
       stow
-      htop
+      btop
       quickshell
       wl-mirror
       jq
       efibootmgr
-      zellij
       home-manager
       upower
-      blesh
     ];
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
-  programs.bash = {
-    enableLsColors = true;
-    blesh.enable = true;
+  programs.fish = {
+    enable = true;
   };
   fonts.packages = with pkgs; [
     noto-fonts
