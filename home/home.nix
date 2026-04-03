@@ -1,12 +1,16 @@
 { pkgs, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
   home = {
     username = "raison";
     homeDirectory = "/home/raison/";
     stateVersion = "25.11";
     packages = with pkgs; [
+      obs-studio
+      unityhub
       # terminal
-      kitty
+      # kitty
+      alacritty
 
       tree-sitter
       fd
@@ -19,10 +23,11 @@
 
       # lsp
       stylua
-      nil # nix ls
+      nil
       lua-language-server
       texlab
       clang-tools
+      omnisharp-roslyn
 
       # wayland
       wl-clipboard
@@ -37,12 +42,6 @@
       # viewers
       kdePackages.okular
       zathura
-      lsd
-      bat
-      btop
-      fzf
-      superfile
-      ripgrep
 
       # text editor
       neovim
@@ -50,63 +49,35 @@
 
       # cli
       zoxide
+      lsd
+      bat
+      btop
+      fzf
+      superfile
+      ripgrep
 
-      cowsay
-      fortune
+			# ui(dms features)
       power-profiles-daemon
-      # dms
       fuzzel # app launcher
-      matugen # themes
       cava
       khal
       fprintd
 
       cups-pk-helper # printes
+
+      # customs
+      sl 
+      cowsay
+      fortune
     ];
-    shell.enableBashIntegration = true;
+
+    shell.enableFishIntegration = true;
     sessionPath = [
       "$HOME/.local/bin"
     ];
   };
 
-  xdg.enable = true;
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-      zoxide init fish | source
-    '';
-    plugins = [
-      {
-        name = "tide";
-        src = pkgs.fishPlugins.tide.src;
-      }
-    ];
-    shellAliases = {
-      nxs = "sudo nixos-rebuild switch --flake ~/nix/";
-      hms = "home-manager switch --flake ~/nix/";
-
-      vi = "nvim";
-      v = "nvim";
-
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit";
-      gp = "git push";
-
-      ls = "lsd";
-      ll = "lsd -l";
-      la = "lsd -a";
-      lla = "lsd -la";
-
-      spf = "superfile";
-
-      cat = "bat";
-
-      top = "btop";
-      htop = "btop";
-      cd = "z";
-    };
-  };
+  imports = [
+    ./modules
+  ];
 }
