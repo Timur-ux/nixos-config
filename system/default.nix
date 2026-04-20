@@ -13,5 +13,6 @@
     ./docker.nix
     ./filesystems.nix
     ./bluetooth.nix
+		./nfs.nix
   ];
 }

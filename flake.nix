@@ -10,36 +10,50 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-  };
-
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-  }: let
-    hostname = "raison-nixos";
-    username = "raison";
-    system = "x86_64-linux";
-    unstable = import nixpkgs-unstable {
-      inherit system;
-      config = {
-        allowUnfree = true;
-      };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-  in {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [./hosts/${hostname}/configuration.nix];
-      specialArgs = {
-        pkgs-unstable = unstable;
-        inherit hostname username;
-      };
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      modules = [./home/home.nix];
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs =
+    {
+      self,
+      ...
+    }@inputs:
+    let
+      hostname = "raison-nixos";
+      username = "raison";
+      system = "x86_64-linux";
+      unstable = import inputs.nixpkgs-unstable {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+    in
+    {
+      nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [ ./hosts/${hostname}/configuration.nix ];
+        specialArgs = {
+          pkgs-unstable = unstable;
+          inherit hostname username;
+        };
+      };
+
+      homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+        modules = [ ./home/home.nix ];
+        extraSpecialArgs = { inherit inputs; };
+      };
+    };
 }

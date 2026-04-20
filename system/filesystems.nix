@@ -31,8 +31,8 @@
       "noatime"
       "nofail"
     ];
-
   };
+
   # windows
   fileSystems."/mnt/windows" = {
     device = "/dev/disk/by-uuid/8E90BFE790BFD3C5";
@@ -42,5 +42,18 @@
       "noatime"
       "nofail"
     ];
+  };
+
+  # swap
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/11e5fc57-d2b2-4e02-bdbd-1470370b4705";
+    }
+  ];
+
+  # shared folder
+  fileSystems."/export/raison" = {
+    device = "/mnt/raison";
+    options = [ "bind" ];
   };
 }

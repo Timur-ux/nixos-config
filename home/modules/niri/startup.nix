@@ -1,0 +1,4 @@
+[
+	{argv = ["firefox"];}
+	{argv = ["alacritty"];}
+]

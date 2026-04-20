@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   home = {
@@ -6,8 +6,12 @@
     homeDirectory = "/home/raison/";
     stateVersion = "25.11";
     packages = with pkgs; [
+      asciiquarium
+      transmission_4-qt
       obs-studio
       unityhub
+      krita
+
       # terminal
       # kitty
       alacritty
@@ -20,6 +24,7 @@
 
       # formatters
       alejandra # nix formatter
+      tex-fmt
 
       # lsp
       stylua
@@ -56,7 +61,7 @@
       superfile
       ripgrep
 
-			# ui(dms features)
+      # ui(dms features)
       power-profiles-daemon
       fuzzel # app launcher
       cava
@@ -66,7 +71,7 @@
       cups-pk-helper # printes
 
       # customs
-      sl 
+      sl
       cowsay
       fortune
     ];
@@ -79,5 +84,8 @@
 
   imports = [
     ./modules
+    inputs.dms.homeModules.dank-material-shell
+    inputs.dms.homeModules.niri
+		inputs.niri.homeModules.niri
   ];
 }

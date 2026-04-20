@@ -4,6 +4,7 @@
 {
   pkgs,
   pkgs-unstable,
+	home-manager,
   ...
 }:
 {
@@ -40,8 +41,6 @@
       cargo
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       cachix
-      unstable.dms-shell
-      unstable.dgop
       wget
       curl
       niri
@@ -67,7 +66,6 @@
       xwayland
       xwayland-satellite
     ];
-
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   programs.xwayland.enable = true;

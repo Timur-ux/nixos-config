@@ -55,6 +55,7 @@
 					set -g @sessionx-zoxide-mode 'on'
 				'';
       }
+      dotbar
       {
         plugin = pkgs.tmuxPlugins.resurrect;
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
@@ -66,7 +67,6 @@
           set -g @continuum-save-interval '15' # minutes
         '';
       }
-      dotbar
     ];
 
   };
