@@ -1,3 +1,4 @@
+{ vars, ... }:
 {
   "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
@@ -5,15 +6,20 @@
 
   "Mod+T" = {
     hotkey-overlay = {
-      title = "Open a Terminal: Alacritty";
+      title =
+        if (vars.terminal == "alacritty") then "Open a Terminal: Alacritty" else "Open a Terminal: Kitty";
     };
-    action.spawn = "alacritty";
+    action =
+      if (vars.terminal == "alacritty") then
+        { spawn = "alacritty"; }
+      else
+        { spawn-sh = "kitty --hold sh -c 'tmux attach || tmux new -s default'"; };
   };
   "Mod+D" = {
     hotkey-overlay = {
-      title = "Run an Application: fuzzel";
+      title = "Run an Application: dms launcher";
     };
-    action.spawn = "fuzzel";
+    action.spawn-sh = "dms ipc call launcher open";
   };
   "Super+Shift+L" = {
     hotkey-overlay = {
@@ -191,7 +197,7 @@
   "Mod+Ctrl+R".action.reset-window-height = [ ];
   "Mod+F".action.maximize-column = [ ];
   "Mod+Shift+F".action.fullscreen-window = [ ];
-	
+
   "Mod+Ctrl+Shift+F".action.toggle-windowed-fullscreen = [ ];
   "Mod+Alt+F".action.spawn-sh = "niri msg action maximize-window-to-edges";
 
@@ -243,7 +249,9 @@
     action.spawn-sh = "niri msg action set-dynamic-cast-window --id $(niri msg --json focused-window | jq .id)";
   };
   "Mod+Ctrl+M" = {
-    hotkey-overlay = { title="Turn off monitors before any move"; };
+    hotkey-overlay = {
+      title = "Turn off monitors before any move";
+    };
     repeat = false;
     action.power-off-monitors = [ ];
   };

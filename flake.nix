@@ -50,10 +50,14 @@
         };
       };
 
-      homeConfigurations.${username} = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
-        modules = [ ./home/home.nix ];
-        extraSpecialArgs = { inherit inputs; };
-      };
+      homeConfigurations.${username} =
+        let
+          vars = import ./home/vars.nix;
+        in
+        inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          modules = [ ./home/home.nix ];
+          extraSpecialArgs = { inherit inputs vars; };
+        };
     };
 }

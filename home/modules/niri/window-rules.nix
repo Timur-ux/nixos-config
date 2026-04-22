@@ -13,19 +13,13 @@
   {
     matches = [
       { app-id = "firefox"; }
-      { title = "^Picture-in-Picture$"; }
-    ];
-    open-floating = true;
-  }
-  {
-    matches = [
-      { app-id = "firefox"; }
     ];
     open-on-workspace = "browser";
   }
   {
     matches = [
       { app-id = "Alacritty"; }
+      { app-id = "kitty"; }
     ];
     open-on-workspace = "terminal";
   }
@@ -38,8 +32,7 @@
   }
   {
     matches = [
-      { app-id = "^org\.keepassxc\.KeePassXC$"; }
-      { app-id = "^org\.gnome\.World\.Secrets$"; }
+      { app-id = "keepassxc"; }
     ];
     block-out-from = "screen-capture";
   }

@@ -13,7 +13,7 @@
       krita
 
       # terminal
-      # kitty
+      kitty
       alacritty
 
       tree-sitter
@@ -21,18 +21,6 @@
 
       # tex
       texlivePackages.latexmk
-
-      # formatters
-      alejandra # nix formatter
-      tex-fmt
-
-      # lsp
-      stylua
-      nil
-      lua-language-server
-      texlab
-      clang-tools
-      omnisharp-roslyn
 
       # wayland
       wl-clipboard
@@ -48,10 +36,6 @@
       kdePackages.okular
       zathura
 
-      # text editor
-      neovim
-      python313Packages.pynvim
-
       # cli
       zoxide
       lsd
@@ -61,19 +45,13 @@
       superfile
       ripgrep
 
-      # ui(dms features)
-      power-profiles-daemon
-      fuzzel # app launcher
-      cava
-      khal
-      fprintd
-
       cups-pk-helper # printes
 
       # customs
       sl
       cowsay
       fortune
+			python313Packages.jupytext
     ];
 
     shell.enableFishIntegration = true;
@@ -86,6 +64,6 @@
     ./modules
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
-		inputs.niri.homeModules.niri
+    inputs.niri.homeModules.niri
   ];
 }

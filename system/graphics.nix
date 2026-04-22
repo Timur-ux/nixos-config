@@ -1,4 +1,5 @@
 {nixpkgs, ...}: {
+	hardware.nvidia-container-toolkit.enable = true;
   hardware.graphics.enable = true;
 
   nixpkgs.config.allowUnfree = true;

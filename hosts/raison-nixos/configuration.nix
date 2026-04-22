@@ -3,8 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   pkgs,
-  pkgs-unstable,
-	home-manager,
   ...
 }:
 {
@@ -31,64 +29,62 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages =
-    let
-      unstable = pkgs-unstable;
-    in
-    with pkgs;
-    [
-      efivar
-      cargo
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      cachix
-      wget
-      curl
-      niri
-      ly
-      python313
-      python313Packages.virtualenv
-      python313Packages.pip
-      nodejs_24
-      zip
-      unzip
-      file
-      git
-      git-lfs
-      cachix
-      stow
-      btop
-      quickshell
-      wl-mirror
-      jq
-      efibootmgr
-      home-manager
-      upower
-      xwayland
-      xwayland-satellite
-    ];
+  environment.systemPackages = with pkgs; [
+    efivar
+    cargo
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    cachix
+    wget
+    curl
+    niri
+    ly
+    python313
+    (python313.withPackages (
+      ps: with ps; [
+        virtualenv
+        pip
+      ]
+    ))
+    nodejs_24
+    zip
+    unzip
+    file
+    git
+    git-lfs
+    cachix
+    stow
+    btop
+    quickshell
+    wl-mirror
+    jq
+    efibootmgr
+    home-manager
+    upower
+    xwayland
+    xwayland-satellite
+  ];
   powerManagement.enable = true;
   powerManagement.powertop.enable = true;
   programs.xwayland.enable = true;
   programs.fish.enable = true;
-	programs.tmux = {
-		enable = true;
-		baseIndex = 1;
-		escapeTime = 0;
-		keyMode = "vi";
-	};
+  programs.tmux = {
+    enable = true;
+    baseIndex = 1;
+    escapeTime = 0;
+    keyMode = "vi";
+  };
   fonts.packages = with pkgs; [
     noto-fonts
     nerd-fonts.jetbrains-mono
   ];
 
-
   # List services that you want to enable:
 
   services.openssh.enable = true;
   services.power-profiles-daemon.enable = true;
-	services.upower.enable = true;
+  services.upower.enable = true;
 
-	# Copy the NixOS configuration file and link it from the resulting system
+  # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
