@@ -51,7 +51,7 @@
       sl
       cowsay
       fortune
-			python313Packages.jupytext
+      python313Packages.jupytext
     ];
 
     shell.enableFishIntegration = true;

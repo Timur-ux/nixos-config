@@ -6,6 +6,7 @@
       if (vars.terminal == "kitty") then
         [
           "kitty"
+					"--hold"
           "sh"
           "-c"
           "'tmux attach -t || tmux new -s default'"

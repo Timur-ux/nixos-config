@@ -22,6 +22,7 @@
       ps: with ps; [
         pynvim
         jupyter-client
+    ipython
         cairosvg
         pyperclip
       ];
