@@ -7,6 +7,5 @@
 		./dms.nix
 		./niri
 		./neovim
-		./packages
   ];
 }

@@ -3,11 +3,12 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    # whatever other neovim configuration you have
     extraPackages = with pkgs; [
-      imagemagick
+      tree-sitter
 
       # formatters
-      alejandra # nix formatter
+      alejandra
       tex-fmt
 
       # lsp
@@ -17,13 +18,23 @@
       texlab
       clang-tools
       omnisharp-roslyn
+
+      imagemagick # for image rendering
     ];
+    extraLuaPackages =
+      ps: with ps; [
+        # ... other lua packages
+        magick # for image rendering
+      ];
     extraPython3Packages =
       ps: with ps; [
         pynvim
+        nbformat
         jupyter-client
-    ipython
-        cairosvg
+        ipykernel
+        cairosvg # for image rendering
+        pnglatex # for image rendering
+        plotly # for image rendering
         pyperclip
       ];
   };
